@@ -3,75 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowTrackr Dashboard</title>
+    <title>FlowTrackr | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: #f4f7f6; display: flex; height: 100vh; }
+        :root {
+            --bg-dark: #0f0f0f;
+            --sidebar-bg: #161616;
+            --card-bg: #1c1c1c;
+            --accent-purple: #9d7cff;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --quote-bg: #2d1b4d;
+        }
 
-        /* Sidebar Layout */
-        .sidebar { width: 250px; background: #2d3436; color: white; padding: 20px; display: flex; flex-direction: column; }
-        .sidebar h2 { margin-bottom: 30px; font-size: 1.5rem; color: #00b894; }
-        .nav-item { padding: 15px; cursor: pointer; border-radius: 8px; transition: 0.3s; margin-bottom: 5px; }
-        .nav-item:hover { background: #4b5557; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 
-        /* Main Content Area */
-        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        nav {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #222;
+        }
+
+        .logo-area { margin-bottom: 2rem; padding-left: 10px; }
+        .logo-area h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; }
+        .logo-area p { color: var(--text-dim); font-size: 0.8rem; margin-top: 4px; }
+
+        .nav-links { list-style: none; }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .nav-item i { margin-right: 15px; width: 20px; text-align: center; }
         
-        /* Dashboard Grid (The Cards) */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .nav-item.active {
+            background-color: #f5f3ff;
+            color: #7c3aed;
+        }
+
+        .nav-item:hover:not(.active) {
+            background-color: #252525;
+            color: white;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            padding: 3rem;
+            max-width: 1100px;
+        }
+
+        .greeting h2 { font-size: 2.2rem; margin-bottom: 8px; }
+        .greeting p { color: var(--text-dim); margin-bottom: 2rem; }
+
+        /* QUOTE BANNER */
+        .quote-banner {
+            background-color: var(--quote-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            border: 1px solid #3d2b5d;
+        }
+        .quote-banner i {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 10px;
+            margin-right: 15px;
+            color: var(--accent-purple);
+        }
+        .quote-banner p { font-style: italic; color: #e0d5ff; }
+
+        /* STAT CARDS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 3rem;
+        }
+        .stat-card {
+            background: linear-gradient(145deg, #2a1a24, #1c1c1c); /* Subtle deep red/brown tint from pic */
+            padding: 2rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card.homework { background: linear-gradient(145deg, #2a1e16, #1c1c1c); }
         
-        /* Components */
-        .timer-val { font-size: 3rem; font-weight: bold; color: #0984e3; margin: 15px 0; }
-        .btn { background: #00b894; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; }
-        .quick-action { display: block; width: 100%; text-align: left; padding: 10px; margin-top: 10px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; }
+        .stat-card i { font-size: 1.2rem; margin-bottom: 1rem; display: block; }
+        .stat-card .count { font-size: 3rem; font-weight: 700; display: block; }
+        .stat-card .label { color: var(--text-dim); font-size: 0.9rem; }
+
+        /* QUICK ACTIONS */
+        .section-title { font-size: 1.4rem; margin-bottom: 1.5rem; }
+        .action-item {
+            background-color: var(--card-bg);
+            padding: 1.2rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .action-item:hover { background-color: #252525; }
+        .action-icon {
+            width: 45px;
+            height: 45px;
+            background: #2a1a24;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #ff4d6d;
+        }
+        .action-info h4 { font-size: 1rem; margin-bottom: 2px; }
+        .action-info p { font-size: 0.8rem; color: var(--text-dim); }
+        .chevron { margin-left: auto; color: #444; }
+
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>FlowTrackr</h2>
-        <div class="nav-item">🏠 Dashboard</div>
-        <div class="nav-item">✅ Tasks</div>
-        <div class="nav-item">📊 Statistics</div>
-        <div class="nav-item">⚙️ Settings</div>
-    </div>
+    <nav>
+        <div class="logo-area">
+            <h1>FlowTrackr</h1>
+            <p>Stay focused. Level up.</p>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-list-check"></i> Tasks</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-book"></i> Homework</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-mobile-screen"></i> Challenge</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-calendar-days"></i> Calendar</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Planner</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-bullseye"></i> Goals</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> Grades</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+        </div>
+    </nav>
 
-    <div class="main-content">
-        <div class="header">
-            <h1>Welcome Back!</h1>
-            <span>March 22, 2026</span>
+    <main>
+        <div class="greeting">
+            <h2>Good morning, Tarek Alhomsi 👋</h2>
+            <p>Here's your progress today</p>
         </div>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Current Session</h3>
-                <div class="timer-val" id="timer">25:00</div>
-                <button class="btn" onclick="startTimer()">Start Flow</button>
-            </div>
+        <div class="quote-banner">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <p>"Success is built on daily habits, not once-in-a-lifetime effort."</p>
+        </div>
 
-            <div class="card">
-                <h3>Quick Actions</h3>
-                <button class="quick-action">+ Add New Task</button>
-                <button class="quick-action">📝 Write Daily Reflection</button>
-                <button class="quick-action">☕ Take 5m Break</button>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-list-check" style="color: #ff4d6d;"></i>
+                <span class="count">0</span>
+                <span class="label">Tasks Remaining</span>
+            </div>
+            <div class="stat-card homework">
+                <i class="fa-solid fa-book" style="color: #ffb703;"></i>
+                <span class="count">0</span>
+                <span class="label">Homework Due</span>
             </div>
         </div>
-    </div>
 
-    <script>
-        function startTimer() {
-            let timeLeft = 25 * 60;
-            const display = document.getElementById('timer');
-            const countdown = setInterval(() => {
-                let minutes = Math.floor(timeLeft / 60);
-                let seconds = timeLeft % 60;
-                display.innerHTML = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                if (timeLeft <= 0) { clearInterval(countdown); alert("Done!"); }
-                timeLeft--;
-            }, 1000);
-        }
-    </script>
+        <h3 class="section-title">Quick Actions</h3>
+        
+        <div class="action-item">
+            <div class="action-icon"><i class="fa-solid fa-list-check"></i></div>
+            <div class="action-info">
+                <h4>Tasks</h4>
+                <p>Create and complete your tasks</p>
+            </div>
+            <i class="fa-solid fa-chevron-right chevron"></i>
+        </div>
+
+        <div class="action-item">
+            <div class="action-icon" style="background: #2a2216; color: #ffb703;"><i class="fa-solid fa-book"></i></div>
+            <div class="action-info">
+                <h4>Homework</h4>
+                <p>Track your homework & daily goals</p>
+            </div>
+            <i class="fa-solid fa-chevron-right chevron"></i>
+        </div>
+    </main>
+
 </body>
 </html>
