@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlowTrackr | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo-area"><h1>FlowTrackr</h1></div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a href="tasks.html" class="nav-item"><i class="fa-solid fa-list-check"></i> Tasks</a>
+            <a href="homework.html" class="nav-item"><i class="fa-solid fa-book"></i> Homework</a>
+            <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="index.html" class="nav-item" style="color:var(--danger); margin-top:auto;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+        </div>
+    </nav>
+
+    <main>
+        <h2 id="greet" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Good morning 👋</h2>
+        <div class="stat-card">
+            <span style="font-size:3rem; font-weight:bold; display:block;">0</span>
+            <span style="color:var(--text-dim)">Tasks Remaining</span>
+        </div>
+    </main>
+
+    <script>
+        // Get name from memory
+        const name = localStorage.getItem('userName') || "User";
+        const hour = new Date().getHours();
+        let greet = "Good morning";
+        if(hour >= 12 && hour < 17) greet = "Good afternoon";
+        else if(hour >= 17) greet = "Good evening";
+
+        document.getElementById('greet').innerText = `${greet}, ${name} 👋`;
+    </script>
+</body>
+</html>
