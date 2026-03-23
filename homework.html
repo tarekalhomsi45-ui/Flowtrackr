@@ -2,154 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlowTrackr | Homework</title>
+    <title>FlowTrackr | Settings</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg-dark: #0f0f0f;
-            --sidebar-bg: #111111;
+            --sidebar-bg: #161616;
+            --card-bg: #1c1c1c;
             --accent-purple: #9d7cff;
             --text-main: #ffffff;
             --text-dim: #a0a0a0;
-            --card-bg: #1a1a1a;
-            --overdue-bg: rgba(255, 77, 109, 0.1);
-            --soon-bg: rgba(255, 183, 3, 0.1);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); display: flex; min-height: 100vh; }
+        nav { width: 260px; background-color: var(--sidebar-bg); padding: 2rem 1rem; border-right: 1px solid #222; }
+        .nav-item { display: flex; align-items: center; padding: 12px 15px; margin-bottom: 8px; border-radius: 12px; color: var(--text-dim); text-decoration: none; font-weight: 500; }
+        .nav-item.active { background-color: #f5f3ff; color: #7c3aed; }
 
-        /* Sidebar */
-        nav { width: 280px; background-color: var(--sidebar-bg); padding: 2.5rem 1.2rem; border-right: 1px solid #222; position: sticky; top: 0; height: 100vh; }
-        .logo-area h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 2.5rem; }
-        .nav-item { display: flex; align-items: center; padding: 14px 18px; border-radius: 14px; color: var(--text-dim); text-decoration: none; font-weight: 500; margin-bottom: 6px; }
-        .nav-item.active { background-color: #f5f3ff; color: #7c3aed; font-weight: 700; }
-        .nav-item i { margin-right: 15px; width: 20px; text-align: center; }
-
-        /* Main Content */
-        main { flex: 1; padding: 4rem 5rem; max-width: 1000px; }
-        .header { margin-bottom: 3rem; }
-        .header h2 { font-size: 2.5rem; font-weight: 700; }
-
-        /* Homework List */
-        .hw-list { display: flex; flex-direction: column; gap: 16px; }
-        .hw-item {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            transition: 0.3s;
-        }
-
-        /* Status Styles from your React Code */
-        .hw-item.overdue { border-color: #ff4d6d; background: var(--overdue-bg); }
-        .hw-item.soon { border-color: #ffb703; background: var(--soon-bg); }
-        .hw-item.completed { opacity: 0.5; border-color: transparent; }
-
-        .check-btn {
-            width: 32px; height: 32px; border-radius: 50%; border: 2px solid #444;
-            display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
-            background: transparent; color: white; margin-top: 2px;
-        }
-        .check-btn.done { background: #00c896; border-color: #00c896; }
-
-        .content { flex: 1; }
-        .title { font-weight: 600; font-size: 1.1rem; margin-bottom: 4px; }
-        .meta { display: flex; gap: 15px; font-size: 0.75rem; color: var(--text-dim); align-items: center; }
-        .pts { color: #ffb703; font-weight: 700; }
-
-        /* Photo Verification Action */
-        .photo-action {
-            margin-top: 12px;
-            font-size: 0.7rem;
-            color: #ffb703;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .photo-action:hover { color: #ffe194; }
-        input[type="file"] { display: none; }
-
-        .trash-btn { color: #444; cursor: pointer; padding: 5px; }
-        .trash-btn:hover { color: #ff4d6d; }
+        main { flex: 1; padding: 3rem; max-width: 800px; }
+        .settings-box { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid #333; }
+        label { display: block; margin-bottom: 10px; color: var(--text-dim); font-size: 0.9rem; }
+        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #333; background: #111; color: white; margin-bottom: 20px; }
+        .save-btn { background: var(--accent-purple); color: black; border: none; padding: 14px 28px; border-radius: 12px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <nav>
-        <div class="logo-area"><h1>FlowTrackr</h1></div>
-        <div class="nav-links">
-            <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i> Dashboard</a>
-            <a href="tasks.html" class="nav-item"><i class="fa-solid fa-list-ul"></i> Tasks</a>
-            <a href="homework.html" class="nav-item active"><i class="fa-solid fa-book-bookmark"></i> Homework</a>
-            <a href="settings.html" class="nav-item"><i class="fa-solid fa-gear"></i> Settings</a>
-        </div>
+        <div class="logo-area" style="margin-bottom: 2rem;"><h1>FlowTrackr</h1></div>
+        <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+        <a href="tasks.html" class="nav-item"><i class="fa-solid fa-list-check"></i> Tasks</a>
+        <a href="homework.html" class="nav-item"><i class="fa-solid fa-book"></i> Homework</a>
+        <a href="settings.html" class="nav-item active"><i class="fa-solid fa-gear"></i> Settings</a>
     </nav>
-
     <main>
-        <div class="header">
-            <h2>Homework</h2>
-            <p style="color: var(--text-dim);">Earn points by uploading proof of your work.</p>
-        </div>
-
-        <div class="hw-list" id="hw-container">
-            <div class="hw-item overdue">
-                <button class="check-btn" onclick="this.classList.toggle('done')"><i class="fa-solid fa-check"></i></button>
-                <div class="content">
-                    <p class="title">Chemistry Worksheet: Ionic Bonds</p>
-                    <div class="meta">
-                        <span><i class="fa-solid fa-triangle-exclamation" style="color:#ff4d6d"></i> Overdue (March 20)</span>
-                        <span class="pts"><i class="fa-solid fa-bolt"></i> +15 pts</span>
-                    </div>
-                    <label class="photo-action">
-                        <input type="file" accept="image/*" capture="environment" onchange="verifyPhoto(this)">
-                        <i class="fa-solid fa-camera"></i> Upload proof for +5 bonus pts
-                    </label>
-                </div>
-                <i class="fa-solid fa-trash-can trash-btn"></i>
-            </div>
-
-            <div class="hw-item soon">
-                <button class="check-btn" onclick="this.classList.toggle('done')"><i class="fa-solid fa-check"></i></button>
-                <div class="content">
-                    <p class="title">Arabic Grammar Presentation</p>
-                    <div class="meta">
-                        <span><i class="fa-solid fa-clock"></i> Due in 2 days</span>
-                        <span class="pts"><i class="fa-solid fa-bolt"></i> +20 pts</span>
-                    </div>
-                    <label class="photo-action">
-                        <input type="file" accept="image/*" onchange="verifyPhoto(this)">
-                        <i class="fa-solid fa-camera"></i> Upload proof for +5 bonus pts
-                    </label>
-                </div>
-                <i class="fa-solid fa-trash-can trash-btn"></i>
-            </div>
+        <h2 style="font-size: 2.2rem; margin-bottom: 2rem;">Settings</h2>
+        <div class="settings-box">
+            <label>Display Name</label>
+            <input type="text" id="prefName" placeholder="Enter your name">
+            <label>DeepSeek API Key</label>
+            <input type="password" id="prefKey" placeholder="sk-...">
+            <button class="save-btn" onclick="saveSettings()">Save Configuration</button>
+            <p id="status" style="margin-top: 15px; color: #00c896; display: none;">Changes saved successfully!</p>
         </div>
     </main>
-
     <script>
-        function verifyPhoto(input) {
-            if (input.files && input.files[0]) {
-                const label = input.parentElement;
-                label.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Verifying with AI...`;
-                
-                // Simulate the AI verification delay from your React code
-                setTimeout(() => {
-                    label.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#00c896"></i> Verified! +5 bonus pts earned`;
-                    label.style.color = "#00c896";
-                    
-                    // Add points to total (you can link this to your global points variable)
-                    console.log("5 bonus points awarded");
-                }, 2000);
-            }
+        // Load settings on page load
+        document.getElementById('prefName').value = localStorage.getItem('user_name') || "";
+        document.getElementById('prefKey').value = localStorage.getItem('api_key') || "";
+
+        function saveSettings() {
+            localStorage.setItem('user_name', document.getElementById('prefName').value);
+            localStorage.setItem('api_key', document.getElementById('prefKey').value);
+            const status = document.getElementById('status');
+            status.style.display = 'block';
+            setTimeout(() => status.style.display = 'none', 3000);
         }
     </script>
 </body>
